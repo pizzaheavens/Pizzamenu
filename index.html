@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -12,42 +11,67 @@
         body { font-family: 'Cairo', sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; color: var(--dark); }
         
         header { background: var(--green); color: white; text-align: center; padding: 30px 15px; border-radius: 0 0 30px 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .hero-text h1 { margin: 0; font-size: 2rem; }
         
+        /* --- لوحة الإعلانات القابلة للضغط --- */
+        .ads-slider {
+            margin: 20px 15px;
+            height: 170px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .ad-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            align-items: flex-end;
+            background-size: cover;
+            background-position: center;
+        }
+        .ad-slide.active { opacity: 1; }
+        .ad-overlay {
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            width: 100%;
+            padding: 20px 15px;
+            color: white;
+        }
+        .ad-overlay h2 { margin: 0; font-size: 1.3rem; color: var(--orange); }
+        .ad-badge { background: #e74c3c; color: white; padding: 2px 8px; border-radius: 5px; font-size: 0.7rem; position: absolute; top: 15px; left: 15px; font-weight: bold; }
+
+        /* --- التبويبات --- */
         .tabs { display: flex; overflow-x: auto; padding: 15px; gap: 10px; position: sticky; top: 0; background: var(--bg); z-index: 100; scrollbar-width: none; }
         .tabs::-webkit-scrollbar { display: none; }
-        .tab { background: var(--white); padding: 10px 25px; border-radius: 50px; white-space: nowrap; cursor: pointer; border: 1px solid #eee; font-weight: 700; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .tab.active { background: var(--orange); color: white; border-color: var(--orange); transform: scale(1.05); }
+        .tab { background: var(--white); padding: 10px 25px; border-radius: 50px; white-space: nowrap; cursor: pointer; border: 1px solid #eee; font-weight: 700; transition: 0.3s; }
+        .tab.active { background: var(--orange); color: white; border-color: var(--orange); }
 
         .container { padding: 0 15px; max-width: 600px; margin: auto; }
-        
-        .product-card { background: var(--white); border-radius: 20px; padding: 12px; margin-bottom: 15px; display: flex; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.04); transition: 0.2s; cursor: pointer; }
-        .product-card:active { transform: scale(0.98); }
-        .product-img { width: 90px; height: 90px; border-radius: 15px; object-fit: cover; margin-left: 15px; }
+        .product-card { background: var(--white); border-radius: 20px; padding: 12px; margin-bottom: 15px; display: flex; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.04); cursor: pointer; }
+        .product-img { width: 95px; height: 95px; border-radius: 15px; object-fit: cover; margin-left: 15px; }
         .product-info { flex: 1; }
-        .product-info h3 { margin: 0 0 5px; font-size: 1.05rem; color: #222; }
-        .product-info p { margin: 0; font-size: 0.8rem; color: #777; line-height: 1.4; }
-        .price-tag { color: var(--green); font-weight: 800; margin-top: 5px; display: block; font-size: 0.95rem; }
+        .price-tag { color: var(--green); font-weight: 800; margin-top: 5px; display: block; }
 
+        /* --- المودال --- */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; align-items: flex-end; }
-        .modal-content { background: var(--white); width: 100%; border-radius: 30px 30px 0 0; padding: 25px; max-height: 90vh; overflow-y: auto; position: relative; }
-        
+        .modal-content { background: var(--white); width: 100%; border-radius: 30px 30px 0 0; padding: 25px; max-height: 90vh; overflow-y: auto; }
         .option-group { margin-bottom: 20px; }
-        .option-group label { display: block; margin-bottom: 10px; font-weight: 700; color: #444; }
-        
         .size-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 10px; }
-        .size-btn { border: 2px solid #eee; padding: 12px 5px; border-radius: 15px; text-align: center; cursor: pointer; transition: 0.2s; font-weight: 600; font-size: 0.9rem; }
+        .size-btn { border: 2px solid #eee; padding: 12px 5px; border-radius: 15px; text-align: center; cursor: pointer; font-weight: 600; }
         .size-btn.selected { border-color: var(--green); background: #f0fdf4; color: var(--green); }
-
-        .qty-control { display: flex; align-items: center; gap: 20px; background: #f1f1f1; padding: 5px 15px; border-radius: 50px; width: fit-content; }
+        
+        .qty-control { display: flex; align-items: center; gap: 20px; background: #f1f1f1; padding: 5px 15px; border-radius: 50px; width: fit-content; margin-top: 10px; }
         .qty-btn { background: var(--white); border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-        .btn-main { background: var(--green); color: white; width: 100%; padding: 18px; border: none; border-radius: 20px; font-weight: 700; font-size: 1.1rem; cursor: pointer; margin-top: 10px; }
+        .btn-main { background: var(--green); color: white; width: 100%; padding: 18px; border: none; border-radius: 20px; font-weight: 700; cursor: pointer; }
 
-        .cart-bar { position: fixed; bottom: 15px; left: 15px; right: 15px; background: var(--dark); color: white; padding: 15px 25px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 500; display: none; cursor: pointer; }
-        .cart-count { background: var(--orange); color: white; padding: 2px 10px; border-radius: 10px; font-size: 0.9rem; margin-right: 10px; }
-
-        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+        /* --- السلة --- */
+        .cart-bar { position: fixed; bottom: 15px; left: 15px; right: 15px; background: var(--dark); color: white; padding: 15px 25px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 500; display: none; cursor: pointer; }
+        .cart-count { background: var(--orange); color: white; padding: 2px 10px; border-radius: 10px; margin-right: 10px; }
+        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
         .customer-form input, .customer-form select { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 12px; font-family: inherit; }
     </style>
 </head>
@@ -58,9 +82,26 @@
     <p>مذاق لا يُنسى في قلب العيزرية</p>
 </header>
 
-<div class="tabs" id="tabs">
+<div class="ads-slider" onclick="openCurrentAd()">
+    <div class="ad-slide active" data-prod-id="101" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=1000');">
+        <span class="ad-badge">عرض خاص</span>
+        <div class="ad-overlay">
+            <h2>العرض العائلي الملكي 👨‍👩‍👧‍👦</h2>
+            <p>بيتزا كبير + أجنحة + سلطة + كولا + بطاطا بـ 85 ₪</p>
+        </div>
+    </div>
+    <div class="ad-slide" data-prod-id="102" style="background-image: url('https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&q=80&w=1000');">
+        <span class="ad-badge">الأكثر طلباً</span>
+        <div class="ad-overlay">
+            <h2>عرض الثنائي الموفر ✌️</h2>
+            <p>2 بيتزا كبير + لتر كولا بـ 100 ₪ فقط</p>
+        </div>
+    </div>
+</div>
+
+<div class="tabs">
     <div class="tab active" onclick="filterMenu('pizza', event)">البيتزا</div>
-    <div class="tab" onclick="filterMenu('sand', event)">الساندوتشات والوجبات</div>
+    <div class="tab" onclick="filterMenu('sand', event)">الوجبات</div>
     <div class="tab" onclick="filterMenu('salad', event)">السلطات</div>
     <div class="tab" onclick="filterMenu('app', event)">المقبلات</div>
 </div>
@@ -73,12 +114,12 @@
         <p id="mDesc" style="color:#666; font-size:0.9rem; margin: 10px 0;"></p>
         
         <div class="option-group">
-            <label>اختر الحجم أو النوع:</label>
+            <label>الخيار المطلوب:</label>
             <div class="size-grid" id="mSizes"></div>
         </div>
 
         <div class="option-group" id="mExtraGroup" style="display:none">
-            <label>إضافات:</label>
+            <label>إضافات مميزة:</label>
             <div style="background:#f9f9f9; padding:15px; border-radius:15px; display:flex; justify-content:space-between; align-items:center;">
                 <span>أطراف محشوة بالجبنة 🧀</span>
                 <input type="checkbox" id="mCrust" onchange="calculateLivePrice()" style="width:22px; height:22px;">
@@ -95,90 +136,93 @@
         </div>
 
         <button class="btn-main" id="addBtn" onclick="addToCart()">إضافة إلى السلة</button>
-        <button onclick="closeModals()" style="width:100%; background:none; border:none; color:#999; margin-top:15px; cursor:pointer;">إلغاء</button>
+        <button onclick="closeModals()" style="width:100%; background:none; border:none; color:#999; margin-top:15px;">تراجع</button>
     </div>
 </div>
 
 <div class="modal" id="cartModal">
     <div class="modal-content">
-        <h3>سلة الطلبات 🛒</h3>
+        <h3>سلة طلباتك 🛒</h3>
         <div id="cartItemsList"></div>
-        
         <div class="customer-form" style="margin-top:20px;">
             <input type="text" id="custName" placeholder="الاسم الكامل">
             <input type="text" id="custLoc" placeholder="العنوان بالتفصيل">
             <select id="orderType">
-                <option value="توصيل">توصيل للمنزل</option>
-                <option value="استلام من المطعم">استلام من المطعم</option>
+                <option value="توصيل">خدمة التوصيل</option>
+                <option value="استلام">استلام من المطعم</option>
             </select>
         </div>
-
-        <button class="btn-main" style="background:#25D366" onclick="checkout()">تأكيد الطلب (WhatsApp) ✅</button>
-        <button onclick="closeModals()" style="width:100%; background:none; border:none; color:#999; margin-top:15px;">إغلاق</button>
+        <button class="btn-main" style="background:#25D366" onclick="checkout()">إرسال عبر واتساب ✅</button>
+        <button onclick="closeModals()" style="width:100%; background:none; border:none; color:#999; margin-top:15px;">متابعة التسوق</button>
     </div>
 </div>
 
 <div class="cart-bar" id="cartBar" onclick="openCart()">
-    <span>عرض السلة <span class="cart-count" id="cCount">0</span></span>
+    <span>عرض الطلب <span class="cart-count" id="cCount">0</span></span>
     <span id="cTotal">0 ₪</span>
 </div>
 
 <script>
-    const whatsappNum = "972556683964";
+    const whatsappNum = "972598531267";
     let cart = [];
     let currentP = null;
     let selectedSize = "";
     let currentQty = 1;
+    let adIndex = 0;
 
     const products = [
-        // PIZZA
-        { id:1, name:"هافين بيتزا", cat:"pizza", prices:{S:30, M:40, L:50}, img:"https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300", desc:"البيتزا الخاصة بنا بخلطة هافين المميزة." },
-        { id:2, name:"بيتزا بالجبنة", cat:"pizza", prices:{S:30, M:40, L:50}, img:"https://images.unsplash.com/photo-1574071318508-1cdbad80ad38?w=300", desc:"عجينة هشة مع مزيج من الأجبان الغنية." },
-        { id:3, name:"بيتزا بالخضار", cat:"pizza", prices:{S:30, M:40, L:50}, img:"https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=300", desc:"خضروات طازجة (فلفل، زيتون، فطر، ذرة)." },
-        { id:4, name:"بيتزا ستيك اللحم", cat:"pizza", prices:{S:40, M:50, L:60}, img:"https://images.unsplash.com/photo-1593504049359-74330189a355?w=300", desc:"قطع ستيك اللحم البقري مع الموزاريلا." },
-        { id:5, name:"بيتزا اللحمة المفرومة", cat:"pizza", prices:{S:40, M:50, L:60}, img:"https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=300", desc:"لحم مفروم متبل مع صلصة البيتزا." },
-        { id:6, name:"بيتزا تونة", cat:"pizza", prices:{S:40, M:50, L:60}, img:"https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=300", desc:"قطع تونة فاخرة مع البصل والزيتون." },
-        { id:7, name:"بيتزا دجاج", cat:"pizza", prices:{S:40, M:50, L:60}, img:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300", desc:"قطع دجاج مشوية بتتبيلة مميزة." },
-        { id:8, name:"بيتزا دجاج بالباربكيو", cat:"pizza", prices:{S:40, M:50, L:60}, img:"https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300", desc:"دجاج مشوي مع صلصة الباربكيو المدخنة." },
-        { id:9, name:"بيتزا دجاج بالبشاميل", cat:"pizza", prices:{S:45, M:55, L:65}, img:"https://images.unsplash.com/photo-1628840042765-356cda07504e?w=300", desc:"مزيج رائع من الدجاج وصلصة البشاميل." },
-        { id:10, name:"بيتزا جمبري بالبشاميل", cat:"pizza", prices:{S:45, M:55, L:65}, img:"https://images.unsplash.com/photo-1555072105-195017585b7c?w=300", desc:"جمبري طازج مع البشاميل والجبنة." },
-
-        // SANDWICHES
-        { id:11, name:"همبرغر هافين", cat:"sand", prices:{"ساندوتش":17, "وجبة":25}, img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300", desc:"برغر لحم منزلي فاخر." },
-        { id:12, name:"همبرغر كرسبي", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://images.unsplash.com/photo-1550547660-d9450f859349?w=300", desc:"دجاج مقرمش مع الصوصات." },
-        { id:13, name:"همبرغر شنيتسل", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=300", desc:"شنيتسل دجاج ذهبي في خبز البرغر." },
-        { id:14, name:"همبرغر صدر دجاج", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?w=300", desc:"صدر دجاج مشوي صحي ولذيذ." },
-        { id:15, name:"ستيك صدر دجاج", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=300", desc:"شرائح صدر الدجاج المتبلة." },
-        { id:16, name:"مسحب", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://images.unsplash.com/photo-1562967914-608f82629710?w=300", desc:"قطع مسحب دجاج مسحّب من العظم." },
-        { id:17, name:"زنجر", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://images.unsplash.com/photo-1610614819513-58e34989848b?w=300", desc:"دجاج زنجر حار ومقرمش." },
-        { id:18, name:"شنيتسل دجاج", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://images.unsplash.com/photo-1594946225395-6242eca24d1a?w=300", desc:"شنيتسل كلاسيكي مقرمش." },
-        { id:19, name:"تشكن راب", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=300", desc:"دجاج ملفوف في خبز التورتيلا." },
-        { id:20, name:"ستيك اللحم", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=300", desc:"ساندوتش ستيك لحم بقري." },
-        { id:21, name:"تونة", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300", desc:"ساندوتش تونة مع المايونيز والخضار." },
-        { id:22, name:"روست بيف", cat:"sand", prices:{"ساندوتش":15}, img:"https://images.unsplash.com/photo-1547050071-19b02521add9?w=300", desc:"لحم بقري روست بيف مدخن." },
-        { id:23, name:"وجبة جمبري", cat:"sand", prices:{"وجبة":50}, img:"https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=300", desc:"وجبة جمبري مقلي مع البطاطا." },
-        { id:24, name:"وجبة صحية", cat:"sand", prices:{"وجبة":20}, img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300", desc:"صدر دجاج مشوي مع سلطة وخضار." },
-
-        // SALADS
-        { id:25, name:"يونانية بالجبنة البيضاء", cat:"salad", prices:{"عادي":15}, img:"https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=300", desc:"خيار، طماطم، زيتون، وجبنة فيتا." },
-        { id:26, name:"مكسيكية بالجبنة الصفراء", cat:"salad", prices:{"عادي":15}, img:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300", desc:"فاصوليا حمراء، ذرة، وجبنة شيدر." },
-        { id:27, name:"سيزر بالدجاج", cat:"salad", prices:{"عادي":20}, img:"https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=300", desc:"خس، دجاج مشوي، سيزر دريسينج." },
-        { id:28, name:"سلطة جرجير", cat:"salad", prices:{"عادي":20}, img:"https://images.unsplash.com/photo-1604908814433-d4d98993493f?w=300", desc:"جرجير طازج مع الرمان والجوز." },
-        { id:29, name:"سلطة تونة", cat:"salad", prices:{"عادي":20}, img:"https://images.unsplash.com/photo-1546793665-c74683c3f38d?w=300", desc:"تونة مع خضار مشكلة وليمون." },
-
-        // APPETIZERS
-        { id:30, name:"أجنحة دجاج حارة", cat:"app", prices:{"عادي":15}, img:"https://images.unsplash.com/photo-1567622622705-414227ed59d6?w=300", desc:"أجنحة دجاج بصوص البوفالو الحار." },
-        { id:31, name:"أجنحة دجاج", cat:"app", prices:{"عادي":15}, img:"https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=300", desc:"أجنحة دجاج مقلية مقرمشة." },
-        { id:32, name:"خبز بالثوم", cat:"app", prices:{"عادي":10}, img:"https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?w=300", desc:"خبز محمص بالزبدة والثوم." },
-        { id:33, name:"خبز بالثوم مع جبنة", cat:"app", prices:{"عادي":15}, img:"https://images.unsplash.com/photo-1619535860434-ba1d8fa12536?w=300", desc:"خبز بالثوم مغطى بالموزاريلا الذائبة." },
-        { id:34, name:"حلقات بصل", cat:"app", prices:{"عادي":15}, img:"https://images.unsplash.com/photo-1639024471283-03518883512d?w=300", desc:"حلقات بصل مقرمشة." },
-        { id:35, name:"قطع شنيتسل", cat:"app", prices:{"عادي":15}, img:"https://images.unsplash.com/photo-1594946225395-6242eca24d1a?w=300", desc:"قطع دجاج شنيتسل صغيرة." },
-        { id:36, name:"أصابع دجاج", cat:"app", prices:{"عادي":20}, img:"https://images.unsplash.com/photo-1562967914-608f82629710?w=300", desc:"أصابع صدر دجاج مقلية." },
-        { id:37, name:"أصابع جبنة", cat:"app", prices:{"عادي":20}, img:"https://images.unsplash.com/photo-1531412435591-64583196c31d?w=300", desc:"أصابع موزاريلا مقلية." },
-        { id:38, name:"بطاطا كيرلي", cat:"app", prices:{"عادي":10}, img:"https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=300", desc:"بطاطا لولبية متبلة." },
-        { id:39, name:"إبرة ناتشوز", cat:"app", prices:{"عادي":8}, img:"https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=300", desc:"رقائق الناتشوز المقرمشة." },
-        { id:40, name:"بطاطا مقلية", cat:"app", prices:{S:5, M:10, L:15}, img:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300", desc:"أصابع بطاطا ذهبية." }
+        // قسم العروض (يفتح عبر الإعلانات)
+        { id:101, name:"العرض العائلي الملكي", cat:"deals", prices:{"العرض":85}, desc:"بيتزا كبير + أجنحة دجاج + سلطة يونانية + لتر كولا + بطاطا.", img:"https://images.unsplash.com/photo-1513104890138-7c749659a591" },
+        { id:102, name:"عرض الثنائي الموفر", cat:"deals", prices:{"العرض":100}, desc:"2 بيتزا كبير من اختيارك + لتر كولا مجاناً.", img:"https://images.unsplash.com/photo-1594007654729-407eedc4be65" },
+        
+        // المنتجات الأساسية
+        
+        { id:1, name:"هافين بيتزا", cat:"pizza", prices:{S:30, M:40, L:50}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScJgZc93payQe9mj4mDz1OZGDat4BfsZyxOcHmr8NLcg&s=10", desc:"بيتزا الخضار والببروني المميزة: صوص طماطم، زيتون أخضر وأسود، فلفل حلو، ذرة، فطر، وشرائح ببروني." },
+        { id:2, name:"بيتزا بالجبنة", cat:"pizza", prices:{S:30, M:40, L:50}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Yc2cvJi8a9vD2a5o3Up3Frz2_s2P4Lf-4sclBIOofA&s=10", desc:"لعشاق البساطة: صوص هافين الخاص مع طبقة غنية من الجبنة." },
+        { id:3, name:"بيتزا بالخضار", cat:"pizza", prices:{S:30, M:40, L:50}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjY_dLVL-Vw3DC8lDI3XIJfIdHx-mMkCTxgPrxvMhyhg&s=10", desc:"مزيج الخضار الطازج: زيتون أخضر وأسود، فلفل حلو، ذرة، وفطر مع الجبن والصوص." },
+        { id:4, name:"بيتزا ستيك اللحم", cat:"pizza", prices:{S:40, M:50, L:60}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeraXLCPRv5vREr9dfHhEtAg1xRgM4qsC6-zmEYkil2Q&s=10", desc:"شرائح ستيك لحم مقطعة ومتبلة مع الصوص والجبنة." },
+        { id:5, name:"بيتزا اللحمة المفرومة", cat:"pizza", prices:{S:40, M:50, L:60}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0ZKHe4CeQMtMBsAJgswok7h6tRfzz-XYx41Vh7_loiA&s=10", desc:"لحمة مفرومة غنية بالنكهة مع صوص هافين والجبنة." },
+        { id:6, name:"بيتزا تونة", cat:"pizza", prices:{S:40, M:50, L:60}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxe-QzNa9d_9dOxCkk5xGWNgJpl1Qw3UQYORWLBg7k8Q&s=10", desc:"قطع تونة فاخرة مع الجبنة وصوص الطماطم." },
+        { id:7, name:"بيتزا دجاج", cat:"pizza", prices:{S:40, M:50, L:60}, img:"https://www.dietcafe.com.qa/wp-content/uploads/2021/08/BBQ-Chicken-Pizza.jpg", desc:"قطع دجاج متبلة مع صوص البيتزا والجبنة." },
+        { id:8, name:"بيتزا دجاج بالباربكيو", cat:"pizza", prices:{S:40, M:50, L:60}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_w-kgMy0IRKD5rENv5cU7lfmiao9aKl34wMiziRJsEg&s=10", desc:"قطع دجاج مشوية مع صوص الباربكيو المدخن والجبنة." },
+        { id:9, name:"بيتزا دجاج بالبشاميل", cat:"pizza", prices:{S:45, M:55, L:65}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0jPVZMkEX_UBY51Rv8mcrGcMZ_04LNfo9n8c6BydY6Q&s=10", desc:"دجاج مع صوص البشاميل الكريمي والجبنة." },
+        { id:10, name:"بيتزا جمبري بالبشاميل", cat:"pizza", prices:{S:45, M:55, L:65}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdzV6nu7_mNiM0NbAPfuQG_ZzRLlUnaNnt85CllMzbUw&s=10", desc:"حبات الجمبري الطازجة مع صوص البشاميل والجبنة." },
+        { id:11, name:"همبرغر هافين", cat:"sand", prices:{"ساندوتش":17, "وجبة":25}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCQj5rANPTeSEIJR4qSFaAHqPpigknyhx6DGYcT4VAqQ&s=10", desc:"لحمة 150غم، خس، بندورة، مخلل، مايونيز، وكاتشب. (الوجبة مع بطاطا وكولا)." },
+        { id:12, name:"همبرغر كرسبي", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_E1UM9idm3eUtW1E2UEgx8ygRCLsDMdyJhrse5YEy7Q&s", desc:"دجاج كرسبي، خس، بندورة، مخلل، ومايونيز." },
+        { id:13, name:"همبرغر شنيتسل", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwiV5Y5oI7G6TgUjT99fXaUv39qIrxyJbiARhqogCKMw&s=10", desc:"شنيتسل مقرمش، خس، بندورة، مخلل، ومايونيز." },
+        { id:14, name:"همبرغر صدر دجاج", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlKHPX7AfriyRS8ZO_gWqwTyxYarD89ICKe9CiaZ12nw&s=10", desc:"صدر دجاج مشوي، خس، بندورة، مخلل، ومايونيز." },
+        { id:17, name:"زنجر", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG00g1uBcrXIZG_qq-kICDr-eIFjRUG4dRZVLZZ5zfvw&s", desc:"قطع زنجر حارة، خس، بندورة، مخلل، ومايونيز." },
+        { id:19, name:"تشكن راب", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4irDV9qAuyg4xvPYvLGbYd8-QwUy42OTlrkW4mWWTPQ&s=10", desc:"قطع دجاج بتغليفة الراب، خس، بندورة، مخلل، ومايونيز." },
+        { id:20, name:"ستيك اللحم (ساندوتش)", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH49W5t7kea37NnSVzU11Xug6Ii9B3fABpQwrQBLvRcA&s=10", desc:"شرائح ستيك لحم، بندورة، جبنة، ومايونيز." },
+        { id:16, name:"مسحب", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlREVS8igFPZn74_VDPji37KrN0j5tWt3w8CSBFPf44w&s=10", desc:"دجاج مسحب، بندورة، جبنة، ومايونيز." },
+        { id:21, name:"تونة (ساندوتش)", cat:"sand", prices:{"ساندوتش":15, "وجبة":23}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEZ7HDpeoHtXDm7p3oPvwGGnJtx9ChfiLTSXqe2PnF6A&s=10", desc:"ساندوتش تونة بخبز طازج." },
+        { id:22, name:"روست بيف", cat:"sand", prices:{"ساندوتش":15}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiSZ5vuOkgB8GjSg6bptQuSIoXY0HjtIJG2f0JJWdBVw&s=10", desc:"شرائح روست بيف مدخن." },
+        { id:23, name:"وجبة جمبري", cat:"sand", prices:{"وجبة":50}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjm0CrpcE836FtvhVnheVlqCBUEBDyz5dtVtStK539-A&s=10", desc:"وجبة جمبري مقلي مقرمشة." },
+        { id:24, name:"وجبة صحية", cat:"sand", prices:{"وجبة":20}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQJkC7CUD08XkOdKUbqsJIo8K7XWoK7G0pRdvW-CPBdw&s", desc:"صدر دجاج مشوي مع السلطة." },
+        { id:25, name:"سلطة يونانية", cat:"salad", prices:{"عادي":15}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKHfT_mAmQNEpxvm8JCEdH-RgXHC-o-5FEa5WaetOzIg&s=10", desc:"خيار، بندورة، خس، زيتون أسود وأخضر، وجبنة فيتا." },
+        { id:26, name:"سلطة مكسيكية", cat:"salad", prices:{"عادي":15}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfXrdLnn4vTjmrjerEFJfwOhZFYmNoQjq8SuP7zJyHyg&s=10", desc:"خيار، بندورة، خس، زيتون، جبنة موزاريلا، وصوص هافين الخاص." },
+        { id:27, name:"سلطة سيزر", cat:"salad", prices:{"عادي":20}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjudS71YnibpD6TNEycwSVWp2uhcoCPHmUffdz7BtfdA&s=10", desc:"خيار، بندورة، خس، زيتون، قطع دجاج مشوي، وصوص رانش." },
+        { id:28, name:"سلطة جرجير", cat:"salad", prices:{"عادي":20}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjgu8fPSZ1bUgCoKOrM8DWdlwumuwTjM0IK7DkVMXO7Q&s=10", desc:"أوراق الجرجير الطازجة، ليمون، بندورة، خيار، وزيتون أخضر." },
+        { id:29, name:"سلطة تونة", cat:"salad", prices:{"عادي":20}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp9FEH7t0g8szGIl0OYJOE9h2kXhDk88X3Qz8h_WdFa2U9QyRW9QqZE_NUvpZaaw5CeI8oAqrRbZx02sJ5hkKeTg2nNFlQo2_W7QcA74r1&s=10", desc:"جرجير، ليمون، بندورة، خيار، زيتون، تونة، ومايونيز." },
+        { id:39, name:"إبرة ناتشوز", cat:"app", prices:{"عادي":8}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ9b6sTumx9S3sau3BDKxVxGKJd07tjT1b66IfQgjb-w&s=10", desc:" إبرة جبنة شيدر سائلة." },
+        { id:30, name:"أجنحة دجاج حارة", cat:"app", prices:{"عادي":15}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnWYI7GVQM0ayeV4vkf2o3HLOzpx-FnWL1PWK2oY5S_w&s=10", desc:"أجنحة دجاج بخلطة هافين الحارة." },
+        { id:34, name:"حلقات بصل", cat:"app", prices:{"عادي":15}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUGxjgAV1JVtlX9rkbZQzB7DoIiRiv215y3nBLArmmpg&s=10", desc:"حلقات بصل ذهبية مقرمشة." },
+        { id:37, name:"أصابع جبنة", cat:"app", prices:{"عادي":20}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRsJKswRXeGs8EMb4EEGFFl3t7F3j_xxlTeQ700abxQ&s", desc:"أصابع موزاريلا ذائبة." },
+        { id:40, name:"بطاطا مقلية", cat:"app", prices:{S:5, M:10, L:15}, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWlAgqxlVQYeMGDSr_KKxWFFdodLFvQsb3Iy_Q3de2Qg&s=10", desc:"أصابع بطاطا مقلية." }
     ];
+
+    // سكربت الإعلانات
+    const slides = document.querySelectorAll('.ad-slide');
+    setInterval(() => {
+        slides[adIndex].classList.remove('active');
+        adIndex = (adIndex + 1) % slides.length;
+        slides[adIndex].classList.add('active');
+    }, 4000);
+
+    function openCurrentAd() {
+        const prodId = parseInt(slides[adIndex].getAttribute('data-prod-id'));
+        openProduct(prodId);
+    }
 
     function filterMenu(cat, e) {
         if(e) {
@@ -192,8 +236,7 @@
                 <img src="${p.img}" class="product-img">
                 <div class="product-info">
                     <h3>${p.name}</h3>
-                    <p>${p.desc}</p>
-                    <span class="price-tag">السعر: ${Object.values(p.prices)[0]} ₪</span>
+                    <span class="price-tag">تبدأ من ${Object.values(p.prices)[0]} ₪</span>
                 </div>
             </div>
         `).join('');
@@ -206,11 +249,8 @@
         document.getElementById('mQty').innerText = currentQty;
         document.getElementById('mTitle').innerText = currentP.name;
         document.getElementById('mDesc').innerText = currentP.desc;
-        
-        // إظهار خيار أطراف الجبنة فقط للبيتزا
         document.getElementById('mExtraGroup').style.display = currentP.cat === 'pizza' ? 'block' : 'none';
         document.getElementById('mCrust').checked = false;
-        
         renderSizes();
         calculateLivePrice();
         document.getElementById('productModal').style.display = 'flex';
@@ -225,52 +265,37 @@
         `).join('');
     }
 
-    function selectSize(s) {
-        selectedSize = s;
-        renderSizes();
-        calculateLivePrice();
-    }
-
-    function updateQty(v) {
-        currentQty = Math.max(1, currentQty + v);
-        document.getElementById('mQty').innerText = currentQty;
-        calculateLivePrice();
+    function selectSize(s) { selectedSize = s; renderSizes(); calculateLivePrice(); }
+    
+    function updateQty(v) { 
+        currentQty = Math.max(1, currentQty + v); 
+        document.getElementById('mQty').innerText = currentQty; 
+        calculateLivePrice(); 
     }
 
     function calculateLivePrice() {
-        let base = currentP.prices[selectedSize];
-        let extra = 0;
+        let price = currentP.prices[selectedSize];
         if(currentP.cat === 'pizza' && document.getElementById('mCrust').checked) {
-            extra = selectedSize === 'S' ? 10 : (selectedSize === 'M' ? 15 : 20);
+            price += (selectedSize === 'S' ? 10 : (selectedSize === 'M' ? 15 : 20));
         }
-        document.getElementById('addBtn').innerText = `إضافة إلى السلة (${(base + extra) * currentQty} ₪)`;
+        document.getElementById('addBtn').innerText = `إضافة (${price * currentQty} ₪)`;
     }
 
     function addToCart() {
-        let base = currentP.prices[selectedSize];
-        let extraPrice = 0;
-        let extraText = "";
-        
+        let price = currentP.prices[selectedSize];
+        let extra = "";
         if(currentP.cat === 'pizza' && document.getElementById('mCrust').checked) {
-            extraPrice = selectedSize === 'S' ? 10 : (selectedSize === 'M' ? 15 : 20);
-            extraText = " + أطراف جبنة";
+            price += (selectedSize === 'S' ? 10 : (selectedSize === 'M' ? 15 : 20));
+            extra = " + أطراف جبنة";
         }
-
-        cart.push({
-            name: currentP.name,
-            size: selectedSize,
-            qty: currentQty,
-            total: (base + extraPrice) * currentQty,
-            details: extraText
-        });
-
+        cart.push({ name: currentP.name, size: selectedSize, qty: currentQty, total: price * currentQty, details: extra });
         updateCartUI();
         closeModals();
     }
 
     function updateCartUI() {
-        const count = cart.reduce((sum, item) => sum + item.qty, 0);
-        const total = cart.reduce((sum, item) => sum + item.total, 0);
+        const count = cart.reduce((s, i) => s + i.qty, 0);
+        const total = cart.reduce((s, i) => s + i.total, 0);
         document.getElementById('cCount').innerText = count;
         document.getElementById('cTotal').innerText = total + " ₪";
         document.getElementById('cartBar').style.display = cart.length > 0 ? 'flex' : 'none';
@@ -278,56 +303,28 @@
 
     function openCart() {
         const list = document.getElementById('cartItemsList');
-        if(cart.length === 0) {
-            list.innerHTML = "<p style='text-align:center'>السلة فارغة</p>";
-        } else {
-            list.innerHTML = cart.map((item, index) => `
-                <div class="cart-item">
-                    <div>
-                        <strong>${item.name}</strong> <small>(${item.size})</small> x${item.qty}
-                        <div style="font-size:0.75rem; color:var(--orange)">${item.details}</div>
-                    </div>
-                    <div>
-                        <span>${item.total} ₪</span>
-                        <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; margin-right:15px; cursor:pointer; font-size:1.1rem;">✕</button>
-                    </div>
-                </div>
-            `).join('');
-        }
+        list.innerHTML = cart.map((item, i) => `
+            <div class="cart-item">
+                <span>${item.name} (x${item.qty})${item.details}</span>
+                <span>${item.total} ₪ <button onclick="removeFromCart(${i})" style="color:red; border:none; background:none;">✕</button></span>
+            </div>
+        `).join('');
         document.getElementById('cartModal').style.display = 'flex';
     }
 
-    function removeFromCart(index) {
-        cart.splice(index, 1);
-        updateCartUI();
-        if(cart.length === 0) closeModals();
-        else openCart();
-    }
-
-    function closeModals() {
-        document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
-    }
+    function removeFromCart(i) { cart.splice(i, 1); updateCartUI(); if(cart.length===0) closeModals(); else openCart(); }
+    function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
 
     function checkout() {
         const name = document.getElementById('custName').value;
         const loc = document.getElementById('custLoc').value;
-        if(!name || !loc) return alert("يرجى إدخال الاسم والعنوان لإتمام الطلب");
-
-        let msg = `🍕 *طلب جديد من هافين بيتزا*\n\n`;
-        msg += `👤 *الزبون:* ${name}\n📍 *العنوان:* ${loc}\n🚚 *النوع:* ${document.getElementById('orderType').value}\n\n`;
-        msg += `--- *الأصناف* ---\n`;
-        
-        cart.forEach((item, i) => {
-            msg += `${i+1}. ${item.name} (${item.size}) x${item.qty}${item.details ? ' ['+item.details+']' : ''}\n💰 ${item.total} ₪\n\n`;
-        });
-
-        const finalTotal = cart.reduce((sum, item) => sum + item.total, 0);
-        msg += `------------------\n💵 *الإجمالي النهائي: ${finalTotal} ₪*`;
-        
+        if(!name || !loc) return alert("يرجى إدخال البيانات");
+        let msg = `🍕 *طلب جديد من هافين بيتزا*\n👤 *الزبون:* ${name}\n📍 *العنوان:* ${loc}\n🚚 *النوع:* ${document.getElementById('orderType').value}\n\n`;
+        cart.forEach((it, i) => msg += `${i+1}. ${it.name} (x${it.qty})${it.details} - ${it.total} ₪\n`);
+        msg += `\n💵 *المجموع: ${cart.reduce((s, i) => s + i.total, 0)} ₪*`;
         window.open(`https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // التشغيل الافتراضي
     filterMenu('pizza');
 </script>
 </body>
